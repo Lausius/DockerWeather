@@ -7,7 +7,6 @@ resources:
 variables:
   dockerRegistryServiceConnection: 'K8SDemoICD'
   imageRepository: 'lausiusdockerweather'
-  containerRegistry: 'k8sdemoicd.azurecr.io'
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
 
@@ -68,5 +67,4 @@ stages:
               imagePullSecrets: |
                 $(imagePullSecret)
               containers: |
-                $(containerRegistry)/$(imageRepository):$(tag)
-
+                k8sdemoicd.azurecr.io/lausiusdockerweather:$(tag)
