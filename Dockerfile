@@ -1,11 +1,16 @@
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
 
-COPY DockerWeather/DockerWeather.csproj .
-RUN dotnet publish "DockerWeather.csproj" -c Release -o out
+# Copy csproj and restore as distinct layers
+COPY DockerWeather/*.csproj .
+RUN dotnet restore
 
+# Copy everything else and build website
+COPY DockerWeather/. .
+RUN dotnet publish -c release -o /DockerWeather --no-restore
+
+# Final stage / image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
-WORKDIR /app
-COPY --from=build-env /app/DockerWeather/out .
-
+WORKDIR /DockerWeather
+COPY --from=build /DockerWeather ./
 ENTRYPOINT ["dotnet", "DockerWeather.dll"]
