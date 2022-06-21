@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: lausiusdockerweather 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lausiusdockerweather
+  template:
+    metadata:
+      labels:
+        app: lausiusdockerweather 
+    spec:
+      containers:
+        - name: lausiusdockerweather 
+          image: k8sdemoicd.azurecr.io/lausiusdockerweather
+          ports:
+          - containerPort: 80
