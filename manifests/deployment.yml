@@ -15,5 +15,8 @@ spec:
       containers:
         - name: lausiusdockerweather 
           image: k8sdemoicd.azurecr.io/lausiusdockerweather
+          env:
+            - name: "ASPNETCORE_ENVIRONMENT"
+              value: "Development"
           ports:
           - containerPort: 80
