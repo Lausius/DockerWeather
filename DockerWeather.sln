@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32526.322
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DockerWeather", "DockerWeather\DockerWeather.csproj", "{B19A2003-EF5C-484C-A6CE-A17B87FA95B4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B19A2003-EF5C-484C-A6CE-A17B87FA95B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B19A2003-EF5C-484C-A6CE-A17B87FA95B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B19A2003-EF5C-484C-A6CE-A17B87FA95B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B19A2003-EF5C-484C-A6CE-A17B87FA95B4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E5D95436-4B27-4E27-84BA-46A7E0C6AB03}
+	EndGlobalSection
+EndGlobal
