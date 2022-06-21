@@ -45,7 +45,7 @@ stages:
     displayName: Deploy
     pool:
       vmImage: $(vmImageName)
-    environment: 'LausiusDockerWeather'
+    environment: 'LausiusDockerWeather.default'
     strategy:
       runOnce:
         deploy:
@@ -64,7 +64,5 @@ stages:
               manifests: |
                 $(Pipeline.Workspace)/manifests/deployment.yml
                 $(Pipeline.Workspace)/manifests/service.yml
-              imagePullSecrets: |
-                $(imagePullSecret)
-              containers: |
-                k8sdemoicd.azurecr.io/lausiusdockerweather:$(tag)
+              imagePullSecrets: $(imagePullSecret)
+              containers: k8sdemoicd.azurecr.io/lausiusdockerweather:$(tag)
