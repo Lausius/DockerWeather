@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: lausiusdockerweather 
 spec:
-  replicas: 3
+  replicas: __replicaNo__
   selector:
     matchLabels:
       app: lausiusdockerweather
@@ -17,6 +17,6 @@ spec:
           image: k8sdemoicd.azurecr.io/lausiusdockerweather
           env:
             - name: "ASPNETCORE_ENVIRONMENT"
-              value: "Development"
+              value: __environment__
           ports:
           - containerPort: 80

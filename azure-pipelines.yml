@@ -1,18 +1,19 @@
 trigger:
-- master
-
+  - master
+  
 resources:
 - repo: self
-
+  
 variables:
   dockerRegistryServiceConnection: 'K8SDemoICD'
   imageRepository: 'lausiusdockerweather'
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
+  imagePullSecret: 'k8sdemoicd1993-auth'
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
-
-
+  
+  
 stages:
 - stage: Build
   displayName: Build stage
@@ -34,12 +35,13 @@ stages:
 
     - publish: manifests
       artifact: manifests
-
-- stage: Deploy
-  displayName: Deploy stage
+  
+- stage: Development
+  displayName: Deploy Development
   dependsOn: Build
   variables:
-    imagePullSecret: 'k8sdemoicd1993-auth'
+    replicaNo: 1
+    environment: Development
   jobs:
   - deployment: Deploy
     displayName: Deploy
@@ -56,7 +58,21 @@ stages:
               action: createSecret
               secretName: $(imagePullSecret)
               dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
-
+          - task: replacetokens@5
+            displayName: Replace Tokens
+            inputs:
+              rootDirectory: '$(Pipeline.Workspace)/manifests&'
+              targetFiles: 'deployment.yml'
+              encoding: 'auto'
+              tokenPattern: 'rm'
+              writeBOM: true
+              actionOnMissing: 'warn'
+              keepToken: false
+              actionOnNoFiles: 'continue'
+              enableTransforms: false
+              enableRecursion: false
+              useLegacyPattern: false
+              enableTelemetry: true
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
             inputs:
