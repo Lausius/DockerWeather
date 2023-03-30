@@ -13,7 +13,7 @@ steps:
 - task: WikiPdfExportTask@3
   inputs:
     cloneRepo: true
-    repo: 'https://dev.azure.com/ICD0037/Initial/_git/Initial.wiki'
+    repo: 'https://ICD0037@dev.azure.com/ICD0037/Initial/_git/Initial.wiki'
     useAgentToken: true
     localpath: '$(System.DefaultWorkingDirectory)/InitialWiki'
     outputFile: '$(Build.ArtifactStagingDirectory)/PDF/InitialWiki.pdf'
