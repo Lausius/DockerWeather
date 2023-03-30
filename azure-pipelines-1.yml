@@ -1,0 +1,25 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: windows-latest
+
+steps:
+- task: WikiPdfExportTask@3
+  inputs:
+    cloneRepo: true
+    repo: 'https://dev.azure.com/ICD0037/Initial/_git/Initial.wiki'
+    useAgentToken: true
+    localpath: '$(System.DefaultWorkingDirectory)/InitialWiki'
+    outputFile: '$(Build.ArtifactStagingDirectory)/PDF/InitialWiki.pdf'
+
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish wiki export to Azure Pipeline'
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)/PDF'
+    artifactName: DevOpsWiki
